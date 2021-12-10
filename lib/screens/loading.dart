@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:weather/location/location.dart';
 import 'package:weather/network/network.dart';
 import 'package:weather/screens/weather.dart';
-
-const apiKey = 'bc1af8d8aaa5592bd385d56075e4f9d0';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -13,10 +12,18 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  String? apiKey;
+
   @override
   void initState() {
     super.initState();
+    loadAsset();
     getLocation();
+  }
+
+  Future<void> loadAsset() async {
+    apiKey = await rootBundle.loadString('assets/weather.api');
+    debugPrint('API_KEY : $apiKey');
   }
 
   void getLocation() async {
