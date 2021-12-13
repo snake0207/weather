@@ -8,18 +8,24 @@ class Model {
       case 1:
       case 2:
       case 3:
-      case 4:
-      case 5:
         return SvgPicture.asset(
           'assets/aqi_$aqi.svg',
           color: Colors.yellow,
           width: 30.0,
           height: 30.0,
         );
+      case 4:
+      case 5:
+        return SvgPicture.asset(
+          'assets/aqi_$aqi.svg',
+          color: Colors.red,
+          width: 30.0,
+          height: 30.0,
+        );
       default:
         return SvgPicture.asset(
           'assets/aqi_empty.svg',
-          color: Colors.red,
+          color: Colors.grey.shade600,
           width: 30.0,
           height: 30.0,
         );
