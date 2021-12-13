@@ -4,12 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Network {
-  final String url;
+  final String weatherUrl;
+  final String airPollutionUrl;
 
-  Network(this.url);
+  Network(this.weatherUrl, this.airPollutionUrl);
 
-  Future<dynamic> getJSON() async {
-    final http.Response response = await http.get(Uri.parse(url));
+  Future<dynamic> getWeatherJSON() async {
+    final http.Response response = await http.get(Uri.parse(weatherUrl));
+
+    if (response.statusCode == 200) {
+      debugPrint("Response: ${response.body}");
+      return jsonDecode(response.body);
+    }
+  }
+
+  Future<dynamic> getAirPollutionJSON() async {
+    final http.Response response = await http.get(Uri.parse(airPollutionUrl));
 
     if (response.statusCode == 200) {
       debugPrint("Response: ${response.body}");

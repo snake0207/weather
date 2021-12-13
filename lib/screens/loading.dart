@@ -31,12 +31,16 @@ class _LoadingState extends State<Loading> {
     await location.getLocation();
 
     Network network = Network(
-        'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric');
+        'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric',
+        'https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey');
 
-    var parsedData = await network.getJSON();
-    debugPrint("Parse: $parsedData");
+    var weatherData = await network.getWeatherJSON();
+    var airPollutionData = await network.getAirPollutionJSON();
+    debugPrint("weatherData: $weatherData");
+    debugPrint("airPollutionData: $airPollutionData");
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Weather(weatherData: parsedData);
+      return Weather(
+          weatherData: weatherData, airPollutionData: airPollutionData);
     }));
   }
 
