@@ -48,8 +48,6 @@ class _WeatherState extends State<Weather> {
     weatherIcon = widget.weatherData['weather'][0]['icon'];
     weatherIcon = 'http://openweathermap.org/img/wn/$weatherIcon@2x.png';
     windSpeed = widget.weatherData['wind']['speed'];
-    // rain1Hour = widget.weatherData['rain']('1h');
-    // snow1Hour = widget.weatherData['snow']['1h'];
     // debugPrint("$city $temperature $timezone $weatherDescription");
 
     aqi = widget.airPollutionData['list'][0]['main']['aqi'];

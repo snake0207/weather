@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:weather/location/location.dart';
 import 'package:weather/network/network.dart';
 import 'package:weather/screens/weather.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:weather/class/openweather.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -39,9 +42,11 @@ class _LoadingState extends State<Loading> {
     var airPollutionData = await network.getAirPollutionJSON();
     debugPrint("weatherData: $weatherData");
     debugPrint("airPollutionData: $airPollutionData");
+
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return Weather(
-          weatherData: weatherData, airPollutionData: airPollutionData);
+          weatherData: jsonDecode(weatherData),
+          airPollutionData: jsonDecode(airPollutionData));
     }));
   }
 
